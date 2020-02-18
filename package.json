@@ -1,0 +1,27 @@
+{
+  "name": "NODE-LESSONS",
+  "version": "1.0.0",
+  "description": "fafafa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rinatgaynullin/NODE-LESSONS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rinatgaynullin/NODE-LESSONS/issues"
+  },
+  "homepage": "https://github.com/rinatgaynullin/NODE-LESSONS#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "consolidate": "^0.15.1",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.3",
+    "request": "^2.88.2"
+  }
+}

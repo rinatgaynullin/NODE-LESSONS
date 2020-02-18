@@ -1,0 +1,24 @@
+<div style="">
+    <h1>News</h1>
+        <div style="display: flex;
+            flex-direction:row;
+            flex-wrap:wrap;
+            margin: 0 auto;"
+        >
+
+            {{#each news }}
+                {{#if news}}
+                    <p style="width: 200px; margin: 5px; border: 1px #000 solid;">{{this}}</p>
+                {{/if}}
+            {{/each}}
+        </div>
+</div>
+
+
+
+
+<h2>How many news you want to view?</h2>
+<form method="POST" action="/testform">
+    <input type="text" name="param" placeholder="Сколько новостей показывать">
+    <input type="submit">
+</form>
