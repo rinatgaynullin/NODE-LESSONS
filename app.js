@@ -6,49 +6,62 @@ const cheerio = require('cheerio');
 const request = require('request');
 
 
-let data = {
+const data = {
     news:[],
-    newsCount: 32,
 }; 
 
 
+function getNews (count) {
+    return new Promise ( ( resolve, reject) =>{
+        request('https://tproger.ru/', (err, response, body) => {
 
+            const data = {
+                news:[],
+            }; 
 
-
-request('https://tproger.ru/', (err, response, body) => {
-
-    if(!err && response.statusCode === 200){
-        const $ = cheerio.load(body);
-        for(let i = 0;  i < $('.entry-content').find('p').length; i++ ){
-            data.news.push( $('.entry-content').eq(i).find('p').text() )
-        }
+            if(!err && response.statusCode === 200){
+                const $ = cheerio.load(body);
+                $('.entry-content').each((index, element) => {
+                    if (index < count){
+                        data.news.push({
+                            id: index,
+                            text: $('.entry-content').eq(index).find('p').text()
+                        }) 
+                    }
+                })
+                console.log(data)
+                resolve(data)
+            } else {
+                reject(error)
+            }
+        })
         
-    }
+    } ) 
+}
 
-    app.engine('hbs', consolidate.handlebars);
-    app.set('view engine', 'hbs');
-    app.set('views', path.resolve(__dirname, 'views'));
-    // Handlebars.registerHelper('newsCount' () {
 
-    // })
 
-    app.use(express.json());
+app.engine('hbs', consolidate.handlebars);
+app.set('view engine', 'hbs');
+app.set('views', path.resolve(__dirname, 'views'));
+// Handlebars.registerHelper('newsCount' () {
 
-    app.use(express.urlencoded({extended: false}));
+// })
 
-    app.get('/', (req, res) => {
-        res.render('news', data)
-    });
+app.use(express.json());
 
-    app.post('/testform', (req, res) => {
-        data.newsCount = req.body.param
-        res.render('news', data);
-    });
+app.use(express.urlencoded({extended: false}));
 
-    app.listen(4000, () => {
-        console.log('server up!!!');
-    });
-    
+app.get('/',  (req, res) => {
+    res.render('news', {})
 });
 
+app.post('/news', async (req, res) => {
+    let newsCount = req.body.param
+    let data = await getNews(newsCount) 
+    res.render('news', data);
+});
 
+app.listen(4000, () => {
+    console.log('server up!!!');
+});
