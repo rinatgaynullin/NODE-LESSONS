@@ -1,0 +1,22 @@
+<div>
+
+    {{#if tasks}}
+        <form>
+            <ul>
+                {{#each tasks}}
+                <li>{{this.title}}</li>
+                <input type="hidden" name='taskId' value="{{this._id}}">
+                <input type="hidden" name='taskStatus' value={{this.status}}>
+                <button type="submit" formmethod="POST" formaction="/delTask">X</button>
+                <button type="submit" formmethod="POST" formaction="/setStatus">Set status</button>
+                {{/each}}
+            </ul>
+        </form>
+    {{/if}}
+</div>
+
+<h2>Form for Homework</h2>
+<form method="POST" action="/addTask">
+    <input type="text" name="postTitle" placeholder="Введите текст">
+    <input type="submit">
+</form>
