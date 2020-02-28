@@ -1,0 +1,19 @@
+<div>
+    <h1>Новоски с Типичного програмиста</h1>
+
+    {{#if text}}
+    <ul>
+        {{#each text}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>
+
+<h2>Сколько новостей показать</h2>
+<form method="POST" action="/news">
+    <input type="text" name="count" placeholder="Сколько новостей показывать">
+    <input type="submit">
+</form>
+<hr>
+<a href="/logout">Выйти из аккаунта</a>
